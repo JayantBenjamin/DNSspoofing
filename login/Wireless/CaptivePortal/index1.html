@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta http-equiv="Pragma" content="no-cache">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+		<title>Wireless Guest Login at EXAMPLE State University</title>
+		<link rel="stylesheet" type="text/css" href="data/reset.css">
+		<link rel="stylesheet" type="text/css" href="data/core.css">
+
+</head>
+<script>
+function submitAction(){
+	var link = document.location.href;
+	var searchString = "redirect=";
+	var equalIndex = link.indexOf(searchString);
+	var redirectUrl = "";
+	if (document.forms[0].action == "") {
+		var url = window.location.href;
+		var args = new Object();
+		var query = location.search.substring(1);
+		var pairs = query.split("&");
+		for(var i=0;i<pairs.length;i++){
+		var pos = pairs[i].indexOf('=');
+			if(pos == -1) continue;
+				var argname = pairs[i].substring(0,pos);
+				var value = pairs[i].substring(pos+1);
+				args[argname] = unescape(value);
+		}
+			document.forms[0].action = args.switch_url; 
+		} 
+      if(equalIndex >= 0) {
+		equalIndex += searchString.length;
+		redirectUrl = "";
+		redirectUrl += link.substring(equalIndex);
+		}
+		if(redirectUrl.length > 255)
+		redirectUrl = redirectUrl.substring(0,255);
+		document.forms[0].redirect_url.value = redirectUrl;
+		document.forms[0].buttonClicked.value = 4;
+      		document.forms[0].submit();
+}
+
+function loadAction(){
+      var url = window.location.href;
+      var args = new Object();
+      var query = location.search.substring(1);
+      var pairs = query.split("&");
+      for(var i=0;i<pairs.length;i++){
+          var pos = pairs[i].indexOf('=');
+          if(pos == -1) continue;
+          var argname = pairs[i].substring(0,pos);
+          var value = pairs[i].substring(pos+1);
+          args[argname] = unescape(value);
+      }
+
+      //alert( "AP MAC Address is " + args.ap_mac);
+      //alert( "The Switch URL to post user credentials is " + args.switch_url);
+      //document.forms[0].action = args.switch_url;
+      // This is the status code returned from webauth login action
+      // Any value of status code from 1 to 5 is error condition and user
+      // should be shown error as below or modify the message as it suits
+      // the customer
+
+      if(args.statusCode == 1){
+        alert("You are already logged in. No further action is required on your part.");
+      }
+      else if(args.statusCode == 2){
+        alert("You are not configured to authenticate against web portal. No further action is required on your part.");
+      }
+      else if(args.statusCode == 3){
+        alert("The username specified cannot be used at this time. Perhaps the username is already logged into the system?");
+      }
+      else if(args.statusCode == 4){
+        alert("The User has been excluded. Please contact the administrator.");
+      }
+      else if(args.statusCode == 5){
+        alert("Invalid username and password. Please try again.");
+      }
+}
+</script>
+<body onload="loadAction();">
+
+
+<div id="header"><div class="window clear">
+
+	<h1 class="hide-at-larger">UNI Wireless Guest Login</h1>
+
+
+	
+	
+
+</div></div>
+
+
+<div id="main"><div class="window">
+
+	<p class="smaller">The UNInet Guest wireless network has limited bandwidth.  If you require additional bandwidth you will need a valid UNInet ID and connect to the wireless network (SSID): UNInet, UNInet 2.0 or UNInet 3.0.</p>
+
+
+	<div id="agreement">
+		<p>I agree that I am a faculty, staff, student, or affiliated guest of EXAMPLE State University and agree to abide by the <a href="http://techbase.UNI.edu/article.asp?id=479">UNI Statement of Acceptable Use</a>, other applicable University policies and guidelines, and all state and federal laws related to Internet use, including copyright laws.</p>
+		  		 
+<form method="post" action="https://login.wireless.UNI.edu/login.html">
+<input TYPE="hidden" NAME="buttonClicked" SIZE="16" MAXLENGTH="15" value="0">
+<input TYPE="hidden" NAME="redirect_url" SIZE="255" MAXLENGTH="255" VALUE="">
+<input TYPE="hidden" NAME="err_flag" SIZE="16" MAXLENGTH="15" value="0">
+<div align="center">
+<input id="input-button" NAME="username" size="25" maxlength="24" value="Username">
+<input id="input-button" NAME="password" size="25" maxlength="24" value="Password">
+<input type="submit" id="submit-button" name="Submit" value="I Agree" class="button" onclick="submitAction();">
+</div>
+</form>
+
+	</div>
+	
+	<p class="smaller" id="assistance">For assistance please call IT Services Support at <a href="tel:15174326200">517-432-6200</a>.</p>
+
+
+</div></div>
+
+
+<div id="footer"><div class="window clear">
+
+	<div id="footer-wordmark">
+			<img alt="EXAMPLE State University - Spartans Will." src="images/UNI-wordmark.jpg">
+	</div>
+	
+	<div id="footer-copyright">
+		<p>&copy; University Board of Trustees. East Lansing, MI 48824<br />UNI is an affirmative-action, equal-opportunity employer.</p>
+	</div>
+	
+
+</div></div>
+
+</body></html>
